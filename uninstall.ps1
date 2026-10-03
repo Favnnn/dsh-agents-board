@@ -25,13 +25,18 @@ if (Test-Path $ProfilePatch) {
   foreach ($Line in $Existing) {
     if ($Line -eq $RowMarker) { $SkipRow = $true; continue }
     if ($SkipRow) {
-      if ($Line -match '^(\s|-)') { continue }
+      # The managed row spans 4 indented lines; a blank line also ends it
+      # (guards the single-row-file case, see install.ps1).
+      if ($Line -match '^\s' -or $Line -match '^-' -or $Line -eq '') { continue }
       $SkipRow = $false
     }
     $Kept += $Line
   }
   if ($Kept.Count -ne $Existing.Count) {
-    while ($Kept.Count -gt 0 -and $Kept[$Kept.Count - 1] -eq '') { $Kept = $Kept[0..($Kept.Count - 2)] }
+    # Guard the single-element case (a 0..-1 range wraps and grows the array).
+    while ($Kept.Count -gt 0 -and $Kept[$Kept.Count - 1] -eq '') {
+      $Kept = if ($Kept.Count -eq 1) { @() } else { $Kept[0..($Kept.Count - 2)] }
+    }
     [System.IO.File]::WriteAllText($ProfilePatch, (($Kept -join "`r`n") + "`r`n"), $Utf8)
     Write-Host "Removed the agents-board row from $ProfilePatch" -ForegroundColor Green
   } else {
@@ -72,7 +77,10 @@ if (Test-Path $SettingsPath) {
       if ($InSection -and $Line -match '^\S') { $InSection = $false }
       if (-not $InSection) { $Kept += $Line }
     }
-    while ($Kept.Count -gt 0 -and $Kept[$Kept.Count - 1] -eq '') { $Kept = $Kept[0..($Kept.Count - 2)] }
+    # Guard the single-element case (a 0..-1 range wraps and grows the array).
+    while ($Kept.Count -gt 0 -and $Kept[$Kept.Count - 1] -eq '') {
+      $Kept = if ($Kept.Count -eq 1) { @() } else { $Kept[0..($Kept.Count - 2)] }
+    }
     [System.IO.File]::WriteAllText($SettingsPath, (($Kept -join "`r`n") + "`r`n"), $Utf8)
     Write-Host "Removed the agents-board section from $SettingsPath" -ForegroundColor Green
   }

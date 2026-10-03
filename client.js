@@ -9,7 +9,7 @@ window.__ModuleLoader__.load({
 		let primitives = require("@deepseek-ai/dsh-client-ui-primitives");
 
 		//#region stylesheet
-		const css = ".aboard-backdrop{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent)}.aboard-panel{position:absolute;display:flex;flex-direction:column;box-sizing:border-box;padding:14px 16px 16px;background:var(--dsw-specific-menu);border:1px solid var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent);border-radius:20px;--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2)}.aboard-header{display:flex;align-items:center;gap:12px;flex:none;padding-bottom:10px;cursor:move;user-select:none;touch-action:none}.aboard-title{margin:0;font-size:14px;font-weight:600;line-height:20px;color:var(--dsw-alias-label-primary)}.aboard-counters{display:flex;flex:1;gap:6px;flex-wrap:wrap;min-width:0}.aboard-counter{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:999px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-secondary);font-size:12px;line-height:20px;white-space:nowrap}.aboard-counter svg{flex:none}.aboard-close{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer}.aboard-close:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;flex:1}.aboard-column{display:flex;flex-direction:column;min-height:0;gap:6px}.aboard-columnHead{flex:none;display:flex;align-items:center;gap:6px;padding:0 2px;font-size:12px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-secondary)}.aboard-columnCount{color:var(--dsw-alias-label-tertiary);font-weight:400}.aboard-columnBody{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px}.aboard-empty{margin:6px 2px;font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}.aboard-card{position:relative;display:flex;flex-direction:column;gap:4px;align-items:stretch;width:100%;text-align:left;padding:8px 10px;border:1px solid var(--dsw-alias-border-l3);border-radius:10px;background:0 0;cursor:pointer;flex:none}.aboard-card:hover{background:var(--dsw-alias-fill-l2)}.aboard-card.aboard-cardWaiting{background:color-mix(in srgb,var(--dsw-alias-state-error-primary) 18%,transparent)}.aboard-card.aboard-cardWaiting:hover{background:color-mix(in srgb,var(--dsw-alias-state-error-primary) 30%,transparent)}.aboard-cardTitleRow{display:flex;align-items:center;gap:6px;min-width:0}.aboard-cardName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-cardPending{flex:none;font-size:11px;line-height:16px;color:var(--dsw-alias-state-warn-primary)}.aboard-cardMeta{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11px;line-height:16px;color:var(--dsw-alias-label-tertiary);font-family:var(--dsw-font-mono)}.aboard-cardContext{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary);font-family:var(--dsw-font-mono)}.aboard-cardSub{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary)}.aboard-cardMode{flex:none;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;line-height:16px;color:var(--dsw-alias-label-secondary);border:1px solid var(--dsw-alias-border-l3);border-radius:999px;padding:0 6px;transition:margin-left .18s ease}.aboard-progress{display:block;height:4px;border-radius:999px;background:color-mix(in srgb,var(--dsw-alias-label-tertiary) 30%,transparent);overflow:hidden}.aboard-progressFill{display:block;height:100%;border-radius:999px;transition:width .2s ease}.aboard-progressOk{background:var(--dsw-alias-state-success-primary)}.aboard-progressWarn{background:var(--dsw-alias-state-warn-primary)}.aboard-progressHot{background:var(--dsw-alias-state-error-primary)}.aboard-cardActions{flex:none;display:flex;align-items:center;gap:4px;overflow:hidden;max-width:0;opacity:0;margin-left:-6px;transition:max-width .18s ease,opacity .18s ease,margin-left .18s ease}.aboard-card:hover .aboard-cardActions,.aboard-card:focus-visible .aboard-cardActions,.aboard-card:focus-within .aboard-cardActions{max-width:96px;opacity:1;margin-left:0}.aboard-cardAction{display:inline-flex;align-items:center;height:18px;padding:0 7px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:var(--dsw-specific-menu);color:var(--dsw-alias-label-secondary);font-size:10px;line-height:16px;cursor:pointer;white-space:nowrap;opacity:0;transition:opacity .12s ease .06s}.aboard-card:hover .aboard-cardAction,.aboard-card:focus-visible .aboard-cardAction,.aboard-card:focus-within .aboard-cardAction{opacity:1}.aboard-cardAction:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-hiddenBar{flex:none;display:flex;justify-content:flex-start;padding:0 2px}.aboard-hiddenToggle{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border:1px dashed var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:20px;cursor:pointer}.aboard-hiddenToggle:hover{color:var(--dsw-alias-label-secondary)}.aboard-hiddenDivider{display:flex;align-items:center;gap:8px;padding:2px 2px;color:var(--dsw-alias-label-tertiary);font-size:10px;line-height:14px;letter-spacing:.4px;text-transform:uppercase;user-select:none}.aboard-hiddenDivider::before,.aboard-hiddenDivider::after{content:'';flex:1;height:1px;background:var(--dsw-alias-border-l2)}.aboard-grip{position:absolute;z-index:2;touch-action:none}.aboard-gripE{top:0;right:0;bottom:0;width:6px;cursor:ew-resize}.aboard-gripS{left:0;right:0;bottom:0;height:6px;cursor:ns-resize}.aboard-gripSe{right:0;bottom:0;width:16px;height:16px;cursor:nwse-resize;border-bottom-right-radius:16px;background:repeating-linear-gradient(-45deg,transparent 0 4px,var(--dsw-alias-label-tertiary) 4px 5px);opacity:.4}.aboard-button{display:inline-flex;align-items:center;gap:8px;min-height:28px;padding:3px 6px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer;font-size:12px;line-height:18px}.aboard-button:hover{color:var(--dsw-alias-label-secondary)}.aboard-buttonLabel{white-space:nowrap}.aboard-settings{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px}.aboard-settingsText{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}.aboard-settingsTitle{margin:0;font-size:13px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-settingsDesc{margin:0;font-size:12px;line-height:16px;color:var(--dsw-alias-label-tertiary)}.aboard-settingsControls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.aboard-languageRow{display:flex;align-items:center;gap:8px}.aboard-languageLabel{font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}.aboard-segmented{display:inline-flex;align-items:stretch;border:1px solid var(--dsw-alias-border-l3);border-radius:8px;background:var(--dsw-alias-fill-l2);padding:2px;gap:2px}.aboard-segment{border:0;border-radius:6px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:18px;padding:0 10px;cursor:pointer;white-space:nowrap}.aboard-segment:hover{color:var(--dsw-alias-label-secondary)}.aboard-segmentActive{background:var(--dsw-specific-menu);color:var(--dsw-alias-label-primary)}.aboard-segment:disabled{cursor:default;opacity:.5}";
+		const css = ".aboard-backdrop{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent)}.aboard-panel{position:absolute;display:flex;flex-direction:column;box-sizing:border-box;padding:14px 16px 16px;background:var(--dsw-specific-menu);border:1px solid var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent);border-radius:20px;--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2)}.aboard-header{display:flex;align-items:center;gap:12px;flex:none;padding-bottom:10px;cursor:move;user-select:none;touch-action:none}.aboard-title{margin:0;font-size:14px;font-weight:600;line-height:20px;color:var(--dsw-alias-label-primary)}.aboard-counters{display:flex;flex:1;gap:6px;flex-wrap:wrap;min-width:0}.aboard-counter{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:999px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-secondary);font-size:12px;line-height:20px;white-space:nowrap}.aboard-counter svg{flex:none}.aboard-close{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer}.aboard-close:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;flex:1}.aboard-column{display:flex;flex-direction:column;min-height:0;gap:6px}.aboard-columnHead{flex:none;display:flex;align-items:center;gap:6px;padding:0 2px;font-size:12px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-secondary)}.aboard-columnCount{color:var(--dsw-alias-label-tertiary);font-weight:400}.aboard-columnBody{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px}.aboard-empty{margin:6px 2px;font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}.aboard-card{position:relative;display:flex;flex-direction:column;gap:4px;align-items:stretch;width:100%;text-align:left;padding:8px 10px;border:1px solid var(--dsw-alias-border-l3);border-radius:10px;background:0 0;cursor:pointer;flex:none}.aboard-card:hover{background:var(--dsw-alias-fill-l2)}.aboard-card.aboard-cardWaiting{background:color-mix(in srgb,var(--dsw-alias-state-error-primary) 18%,transparent)}.aboard-card.aboard-cardWaiting:hover{background:color-mix(in srgb,var(--dsw-alias-state-error-primary) 30%,transparent)}.aboard-card.aboard-cardFinished{background:color-mix(in srgb,var(--dsw-alias-state-success-primary) 18%,transparent)}.aboard-card.aboard-cardFinished:hover{background:color-mix(in srgb,var(--dsw-alias-state-success-primary) 30%,transparent)}.aboard-cardTitleRow{display:flex;align-items:center;gap:6px;min-width:0}.aboard-cardName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-cardPending{flex:none;font-size:11px;line-height:16px;color:var(--dsw-alias-state-warn-primary)}.aboard-cardMeta{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11px;line-height:16px;color:var(--dsw-alias-label-tertiary);font-family:var(--dsw-font-mono)}.aboard-cardContext{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary);font-family:var(--dsw-font-mono)}.aboard-cardSub{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary)}.aboard-cardMode{flex:none;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;line-height:16px;color:var(--dsw-alias-label-secondary);border:1px solid var(--dsw-alias-border-l3);border-radius:999px;padding:0 6px;transition:margin-left .18s ease}.aboard-progress{display:block;height:4px;border-radius:999px;background:color-mix(in srgb,var(--dsw-alias-label-tertiary) 30%,transparent);overflow:hidden}.aboard-progressFill{display:block;height:100%;border-radius:999px;transition:width .2s ease}.aboard-progressOk{background:var(--dsw-alias-state-success-primary)}.aboard-progressWarn{background:var(--dsw-alias-state-warn-primary)}.aboard-progressHot{background:var(--dsw-alias-state-error-primary)}.aboard-cardActions{flex:none;display:flex;align-items:center;gap:4px;overflow:hidden;max-width:0;opacity:0;margin-left:-6px;transition:max-width .18s ease,opacity .18s ease,margin-left .18s ease}.aboard-card:hover .aboard-cardActions,.aboard-card:focus-visible .aboard-cardActions,.aboard-card:focus-within .aboard-cardActions{max-width:96px;opacity:1;margin-left:0}.aboard-cardAction{display:inline-flex;align-items:center;height:18px;padding:0 7px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:var(--dsw-specific-menu);color:var(--dsw-alias-label-secondary);font-size:10px;line-height:16px;cursor:pointer;white-space:nowrap;opacity:0;transition:opacity .12s ease .06s}.aboard-card:hover .aboard-cardAction,.aboard-card:focus-visible .aboard-cardAction,.aboard-card:focus-within .aboard-cardAction{opacity:1}.aboard-cardAction:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-hiddenBar{flex:none;display:flex;justify-content:flex-start;padding:0 2px}.aboard-hiddenToggle{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border:1px dashed var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:20px;cursor:pointer}.aboard-hiddenToggle:hover{color:var(--dsw-alias-label-secondary)}.aboard-hiddenDivider{display:flex;align-items:center;gap:8px;padding:2px 2px;color:var(--dsw-alias-label-tertiary);font-size:10px;line-height:14px;letter-spacing:.4px;text-transform:uppercase;user-select:none}.aboard-hiddenDivider::before,.aboard-hiddenDivider::after{content:'';flex:1;height:1px;background:var(--dsw-alias-border-l2)}.aboard-grip{position:absolute;z-index:2;touch-action:none}.aboard-gripE{top:0;right:0;bottom:0;width:6px;cursor:ew-resize}.aboard-gripS{left:0;right:0;bottom:0;height:6px;cursor:ns-resize}.aboard-gripSe{right:0;bottom:0;width:16px;height:16px;cursor:nwse-resize;border-bottom-right-radius:16px;background:repeating-linear-gradient(-45deg,transparent 0 4px,var(--dsw-alias-label-tertiary) 4px 5px);opacity:.4}.aboard-button{display:inline-flex;align-items:center;gap:8px;min-height:28px;padding:3px 6px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer;font-size:12px;line-height:18px}.aboard-button:hover{color:var(--dsw-alias-label-secondary)}.aboard-buttonLabel{white-space:nowrap}.aboard-settings{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px}.aboard-settingsText{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}.aboard-settingsTitle{margin:0;font-size:13px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-settingsDesc{margin:0;font-size:12px;line-height:16px;color:var(--dsw-alias-label-tertiary)}.aboard-settingsControls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.aboard-languageRow{display:flex;align-items:center;gap:8px}.aboard-languageLabel{font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}.aboard-segmented{display:inline-flex;align-items:stretch;border:1px solid var(--dsw-alias-border-l3);border-radius:8px;background:var(--dsw-alias-fill-l2);padding:2px;gap:2px}.aboard-segment{border:0;border-radius:6px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:18px;padding:0 10px;cursor:pointer;white-space:nowrap}.aboard-segment:hover{color:var(--dsw-alias-label-secondary)}.aboard-segmentActive{background:var(--dsw-specific-menu);color:var(--dsw-alias-label-primary)}.aboard-notifyCol{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.aboard-select{height:22px;max-width:190px;padding:0 6px;border:1px solid var(--dsw-alias-border-l3);border-radius:6px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-primary);font-size:11px;line-height:18px}.aboard-testButton{height:22px;padding:0 10px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-secondary);font-size:11px;line-height:20px;cursor:pointer;white-space:nowrap}.aboard-testButton:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-notifyHint{max-width:280px;text-align:right;font-size:11px;line-height:14px;color:var(--dsw-alias-label-tertiary)}.aboard-toasts{position:fixed;right:18px;bottom:150px;z-index:95;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}.aboard-toast{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:2px;max-width:min(340px,70vw);padding:8px 12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px;background:var(--dsw-specific-menu);box-shadow:var(--dsw-elevation-prominent);cursor:pointer;text-align:left;animation:aboard-toastIn .18s ease}.aboard-toast:hover{background:var(--dsw-alias-fill-l2)}@keyframes aboard-toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.aboard-toastTitle{font-size:11px;line-height:14px;font-weight:600;color:var(--dsw-alias-state-success-primary)}.aboard-toastBody{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:16px;color:var(--dsw-alias-label-primary)}.aboard-segment:disabled{cursor:default;opacity:.5}.aboard-switch{position:relative;flex:none;width:34px;height:18px;border-radius:999px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-fill-l2);cursor:pointer;padding:0;transition:background .15s,border-color .15s}.aboard-switch[aria-checked='true']{background:var(--dsw-alias-state-success-primary);border-color:var(--dsw-alias-state-success-primary)}.aboard-switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:999px;background:var(--dsw-alias-label-tertiary);opacity:1;transition:transform .15s,background .15s}.aboard-switch[aria-checked='true']::after{transform:translateX(16px);background:var(--dsw-specific-menu);opacity:1}.aboard-switch:disabled{opacity:.45;cursor:default}";
 		const tagId = "dsh-agents-board/board.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
@@ -20,7 +20,25 @@ window.__ModuleLoader__.load({
 		}
 		//#endregion
 		//#region lib/types/client/board-model.js
-		const { StateDot, Switch, IconCloseOutline16 } = primitives;
+		const { StateDot, IconCloseOutline16 } = primitives;
+		/** Self-contained toggle switch. The harness primitives package no
+		 * longer ships a Switch component; destructuring it yielded undefined,
+		 * the settings card then called createElement(undefined) and React
+		 * error #130 blacked out every plugin card on the Plugins tab. The
+		 * board carries its own switch so its card can never die that way. */
+		function Switch(props) {
+			return react.createElement("button", {
+				type: "button",
+				role: "switch",
+				className: "aboard-switch",
+				"aria-checked": props.checked === true,
+				"aria-label": props.label,
+				disabled: props.disabled === true,
+				onClick: () => {
+					if (props.disabled !== true) props.onChange(!(props.checked === true));
+				}
+			});
+		}
 		/** Disjoint token buckets; reasoning tokens already ride `outputTokens`. */
 		function totalTokens(usage) {
 			if (!usage) return 0;
@@ -86,7 +104,15 @@ window.__ModuleLoader__.load({
 				const isArchived = archived.has(id);
 				const running = row.running === true;
 				if (running && !isArchived) runningCount += 1;
-				columns[isArchived ? "archive" : running ? "running" : "done"].push(row);
+				// Finished subagents are results, not tasks: they clutter Done,
+				// and crashed ones pile up in Archive. A stopped subagent leaves
+				// every column; the parent card still counts it via the subagent
+				// badge. Only origin==="subagent" rows are filtered — a running
+				// subagent shows in Working (or Archive if it got archived).
+				if (!running && row.origin === "subagent") continue;
+				if (isArchived) columns.archive.push(row);
+				else if (running) columns.running.push(row);
+				else columns.done.push(row);
 			}
 			for (const key of ["running", "done", "archive"]) {
 				columns[key].sort((left, right) => right.updatedAt - left.updatedAt);
@@ -416,7 +442,18 @@ window.__ModuleLoader__.load({
 			"settings.description": "Sidebar button and overlay panel listing every agent: steps, context, tokens, subagents.",
 			"settings.switch": "Show the agents board",
 			"settings.language": "Language",
-			"settings.languageAuto": "Auto"
+			"settings.languageAuto": "Auto",
+			"settings.notify": "Notify when an agent finishes",
+			"notify.title": "Agent finished a task",
+			"notify.pending": "Agent awaits your reply",
+			"settings.sound": "Audio via",
+			"settings.soundBrowser": "Browser",
+			"settings.soundWav": "Windows + device",
+			"settings.soundProcess": "Windows process",
+			"settings.device": "Output device",
+			"settings.deviceDefault": "System default",
+			"settings.deviceNone": "no list",
+			"settings.test": "Test"
 		};
 		/** Russian dictionary, key-identical to the English source of truth. */
 		const ru = {
@@ -455,7 +492,18 @@ window.__ModuleLoader__.load({
 			"settings.description": "Кнопка в сайдбаре и панель со всеми агентами: шаги, контекст, токены, субагенты.",
 			"settings.switch": "Показывать доску агентов",
 			"settings.language": "Язык",
-			"settings.languageAuto": "Авто"
+			"settings.languageAuto": "Авто",
+			"settings.notify": "Уведомлять о завершении задачи",
+			"notify.title": "Агент завершил задачу",
+			"notify.pending": "Агент ждёт вашего ответа",
+			"settings.sound": "Озвучивание через",
+			"settings.soundBrowser": "Браузер",
+			"settings.soundWav": "Windows + устройство",
+			"settings.soundProcess": "Процесс Windows",
+			"settings.device": "Устройство вывода",
+			"settings.deviceDefault": "Системное по умолчанию",
+			"settings.deviceNone": "нет списка",
+			"settings.test": "Проба"
 		};
 		//#endregion
 		//#region lib/types/client/components.js
@@ -543,10 +591,22 @@ window.__ModuleLoader__.load({
 				const cancel = playExitAnimation(cardRef.current);
 				return cancel === null ? undefined : cancel;
 			}, [isExiting]);
+			const isWaiting = pending.has(row.id);
+			// The green mark is the session manager's own completed bit (the same
+			// signal the sidebar dot reads). A page resync can re-arm the bit for
+			// an already-viewed completion, so the fill also requires unseen
+			// steps: a genuinely new finish always adds assistant steps, a
+			// replayed bit does not.
+			const rowSteps = stats && typeof stats.steps === "number" ? stats.steps : 0;
+			const seenSteps = actions.doneSeen ? actions.doneSeen.get(row.id) : undefined;
+			const peakSteps = actions.donePeak ? actions.donePeak.get(row.id) : undefined;
+			const freshSteps = Math.max(typeof peakSteps === "number" ? peakSteps : 0, rowSteps);
+			const isFreshFinish = !isWaiting && !isArchived && row.completed === true
+				&& (!(typeof seenSteps === "number") || seenSteps < freshSteps);
 			return react.createElement("button", {
 				type: "button",
 				ref: cardRef,
-				className: pending.has(row.id) ? "aboard-card aboard-cardWaiting" : "aboard-card",
+				className: isWaiting ? "aboard-card aboard-cardWaiting" : isFreshFinish ? "aboard-card aboard-cardFinished" : "aboard-card",
 				onClick: () => actions.openSession(row.id)
 			},
 				react.createElement("span", { className: "aboard-cardTitleRow" },
@@ -881,13 +941,38 @@ window.__ModuleLoader__.load({
 				props.wide ? react.createElement("span", { className: "aboard-buttonLabel" }, t("board.title")) : null
 			);
 		}
-		/** Settings → Plugins card: framed area with the language selector and the switch. */
+		/** Settings → Plugins card: language, board switch, notifications, audio output. */
 		function BoardSettingsCard(props) {
 			const board = props.useBoard(identity);
+			// WinMM render devices, fetched from the host once notify turns on.
+			const [devices, setDevices] = react.useState(null);
+			// Last local pick: the select and the Test probe answer instantly,
+			// without waiting for the settings mirror round-trip.
+			const [probeDev, setProbeDev] = react.useState(null);
+			react.useEffect(() => {
+				if (!board.value || board.value.notify !== true || devices !== null) return;
+				let alive = true;
+				try {
+					fetch("/agents-board/devices").then((r) => r.json()).then((list) => {
+						if (alive) setDevices(Array.isArray(list) ? list : []);
+					}).catch(() => {
+						if (alive) setDevices([]);
+					});
+				} catch {
+					if (alive) setDevices([]);
+				}
+				return () => {
+					alive = false;
+				};
+			}, [board.value ? board.value.notify === true : false, devices]);
 			if (board.status !== "ready") return null;
 			const t = resolveT(board, props.t);
 			const enabled = board.value ? board.value.enabled !== false : true;
 			const language = board.value && typeof board.value.language === "string" ? board.value.language : "auto";
+			const notifyOn = board.value ? board.value.notify === true : false;
+			const soundMode = board.value && (board.value.sound === "wav" || board.value.sound === "process") ? board.value.sound : "browser";
+			const savedDev = board.value && typeof board.value.device === "string" ? board.value.device : "";
+			const shownDev = probeDev !== null ? probeDev : savedDev;
 			return react.createElement("div", { className: "aboard-settings" },
 				react.createElement("div", { className: "aboard-settingsText" },
 					react.createElement("h3", { className: "aboard-settingsTitle" }, t("settings.title")),
@@ -907,14 +992,106 @@ window.__ModuleLoader__.load({
 							}, code === "auto" ? t("settings.languageAuto") : code.toUpperCase()))
 						)
 					),
-					react.createElement(Switch, {
-						checked: enabled,
-						label: t("settings.switch"),
-						disabled: board.writable !== true,
-						title: board.writable ? undefined : t("board.title"),
-						onChange: (next) => props.actions.setEnabled(next)
-					})
+					react.createElement("div", { className: "aboard-languageRow" },
+						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.switch")),
+						react.createElement(Switch, {
+							checked: enabled,
+							label: t("settings.switch"),
+							disabled: board.writable !== true,
+							onChange: (next) => props.actions.setEnabled(next)
+						})
+					),
+					react.createElement("div", { className: "aboard-notifyCol" },
+						react.createElement("div", { className: "aboard-languageRow" },
+							react.createElement("span", { className: "aboard-languageLabel" }, t("settings.notify")),
+							react.createElement(Switch, {
+								checked: notifyOn,
+								label: t("settings.notify"),
+								disabled: board.writable !== true,
+								onChange: (next) => props.actions.setNotify(next)
+							})
+						)
+					),
+					notifyOn ? react.createElement("div", { className: "aboard-languageRow" },
+						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.sound")),
+						react.createElement("select", {
+							className: "aboard-select",
+							value: soundMode,
+							disabled: board.writable !== true,
+							onChange: (event) => props.actions.setSound(event.target.value)
+						},
+							react.createElement("option", { value: "browser" }, t("settings.soundBrowser")),
+							react.createElement("option", { value: "wav" }, t("settings.soundWav")),
+							react.createElement("option", { value: "process" }, t("settings.soundProcess"))
+						),
+						react.createElement("button", {
+							type: "button",
+							className: "aboard-testButton",
+							title: t("settings.test"),
+							onClick: () => props.actions.testSound()
+						}, t("settings.test"))
+					) : null,
+					notifyOn && soundMode === "wav" ? react.createElement("div", { className: "aboard-languageRow" },
+						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.device")),
+						react.createElement("select", {
+							className: "aboard-select",
+							value: shownDev,
+							disabled: board.writable !== true,
+							onChange: (event) => {
+								setProbeDev(event.target.value);
+								props.actions.setDevice(event.target.value);
+							}
+						},
+							react.createElement("option", { value: "" }, t("settings.deviceDefault")),
+							(devices || []).map((d) => react.createElement("option", { key: d.id, value: d.id }, d.name)),
+							devices !== null && devices.length === 0 ? react.createElement("option", { value: "-1", disabled: true }, t("settings.deviceNone")) : null
+						)
+					) : null
 				)
+			);
+		}
+		/** In-page completion toasts, lifted clear of the composer; also the
+		 * always-mounted watcher that turns a fresh "awaiting your reply"
+		 * state (approval / plan review / question) into an alert. */
+		function ToastView(props) {
+			const board = props.useBoard(identity);
+			const toastState = props.useToasts(identity);
+			const pending = typeof props.useSessionPendingInteraction === "function" ? props.useSessionPendingInteraction(identity) : null;
+			const pendingPrev = react.useRef(null);
+			react.useEffect(() => {
+				const ids = pending instanceof Map ? Array.from(pending.keys()) : [];
+				const prev = pendingPrev.current;
+				pendingPrev.current = ids;
+				// First observation only records: sessions already waiting at
+				// mount must not flood the page with alerts.
+				if (prev === null) return;
+				for (const id of ids) {
+					if (prev.indexOf(id) < 0) {
+						try {
+							props.actions.alertPending(id);
+						} catch {
+							// Stale or missing row: the next pending update retries.
+						}
+					}
+				}
+			}, [pending]);
+			if (board.status !== "ready") return null;
+			const t = resolveT(board, props.t);
+			const items = toastState && toastState.items ? toastState.items : [];
+			if (items.length === 0) return null;
+			return react.createElement("div", { className: "aboard-toasts" },
+				items.map((toast) => react.createElement("button", {
+					key: toast.key,
+					type: "button",
+					className: "aboard-toast",
+					onClick: () => {
+						props.actions.closeToast(toast.key);
+						props.actions.openSession(toast.id);
+					}
+				},
+					react.createElement("span", { className: "aboard-toastTitle" }, t(toast.kind === "pending" ? "notify.pending" : "notify.title")),
+					react.createElement("span", { className: "aboard-toastBody" }, toast.text)
+				))
 			);
 		}
 		function identity(value) {
@@ -941,8 +1118,16 @@ window.__ModuleLoader__.load({
 		 * registrations sharing one inject face (scope + open-state + actions).
 		 * @param {object} ctx - client plugin context.
 		 */
-		function apply(ctx) {
+		function applyBoard(ctx) {
 			ctx.effect(() => ctx.locale.register(NS, { en, ru }), "agents-board: dictionaries");
+			// The green "finished while away" mark is the session manager's own
+			// completed bit (the same one the sidebar dot reads) - no local
+			// tracker anymore. Drop the stale key of the removed seen map.
+			try {
+				localStorage.removeItem("agents-board.seen");
+			} catch {
+				// Storage disabled: the stale key simply stays unread.
+			}
 			const scope = ctx.settingsScope.bind({ namespace: NS });
 			const view = store.createSnapshotStore({ open: false });
 			const actions = {
@@ -954,7 +1139,46 @@ window.__ModuleLoader__.load({
 				setLanguage: (next) => {
 					void scope.set("language", next);
 				},
+				setNotify: (next) => {
+					void scope.set("notify", next);
+				},
+				setDevice: (next) => {
+					void scope.set("device", next);
+				},
+				setSound: (next) => {
+					void scope.set("sound", next === "wav" || next === "process" ? next : "browser");
+				},
+				closeToast: (key) => {
+					const cur = toasts.getSnapshot();
+					toasts.set({ items: cur.items.filter((item) => item.key !== key) });
+				},
+				testSound: (device) => {
+					playChime(device);
+				},
+				alertPending: (id) => {
+					try {
+						const listStore = ctx.sessions.list;
+						if (!listStore || typeof listStore.getSnapshot !== "function") return;
+						const row = listStore.getSnapshot().byId[id];
+						if (!row || row.blank === true || row.origin === "subagent") return;
+						notifyFinish(row, false, "pending");
+					} catch {
+						// Snapshot hiccup: the next pending update retries.
+					}
+				},
 				openSession: (id) => {
+					// Record what the user has now seen, so a later resync re-arm of
+					// the manager completed bit cannot paint the card green again.
+					try {
+						const listStore = ctx.sessions.list;
+						if (listStore && typeof listStore.getSnapshot === "function") {
+							const row = listStore.getSnapshot().byId[id];
+							const stats = row && row.projectionValues && row.projectionValues.sessionStats;
+							doneSeen.set(id, stats && typeof stats.steps === "number" ? stats.steps : 0);
+						}
+					} catch {
+						// Snapshot hiccup: the green suppression just skips this view.
+					}
 					const address = ctx.sessions.subagentAddress(id);
 					if (address !== undefined) ctx.sessions.openSubagent(address);
 					else ctx.sessions.open(id);
@@ -970,30 +1194,233 @@ window.__ModuleLoader__.load({
 					});
 				}
 			};
+			// Completion alerts. The trigger is our own running→idle edge over the
+			// sessions mirror plus the manager `completed` bit: the bit alone
+			// never fires for the session the user is watching (it deliberately
+			// skips selected sessions), which muted the completions they observed
+			// live. Sound modes mirror dsh-text-reader exactly: the BROWSER plays
+			// the wav itself (the per-app router maps the browser), "Windows +
+			// устройство" renders on the picked MCI device, "Процесс Windows"
+			// plays from a spawned powershell on the system default — which the
+			// router can map per-app. Visual is the in-page toast raised above
+			// the composer; no native OS popup (it doubled the alert).
+			const armed = new Set();
+			const runningPrev = new Map();
+			const firedAt = new Map();
+			const alertedSteps = new Map();
+			const donePeak = new Map();
+			const doneSeen = new Map();
+			const chimeRefs = new Set();
+			const toasts = store.createSnapshotStore({ items: [] });
+			// Expose the viewed/peak step marks to the cards: EntryCard suppresses
+			// the green fill for completions the user has already seen, so a
+			// resync re-arm after a window switch cannot repaint them green.
+			actions.doneSeen = doneSeen;
+			actions.donePeak = donePeak;
+			let toastSeq = 0;
+			const shouldAlert = (id) => {
+				const stamp = Date.now();
+				const last = firedAt.get(id);
+				if (typeof last === "number" && stamp - last < 15000) return false;
+				if (firedAt.size > 200) firedAt.clear();
+				firedAt.set(id, stamp);
+				return true;
+			};
+			const pushToast = (id, text, kind) => {
+				const key = ++toastSeq;
+				const cur = toasts.getSnapshot();
+				toasts.set({ items: cur.items.concat([{ key, id, text, kind }]).slice(-3) });
+				setTimeout(() => {
+					const next = toasts.getSnapshot();
+					const items = next.items.filter((item) => item.key !== key);
+					if (items.length !== next.items.length) toasts.set({ items });
+				}, 8000);
+			};
+			let chimeQueued = false;
+			const queueChimeReplay = () => {
+				if (chimeQueued) return;
+				chimeQueued = true;
+				const flush = () => {
+					try {
+						window.removeEventListener("pointerdown", flush, true);
+						window.removeEventListener("keydown", flush, true);
+					} catch {
+						// Nothing to remove.
+					}
+					chimeQueued = false;
+					playChime();
+				};
+				try {
+					window.addEventListener("pointerdown", flush, true);
+					window.addEventListener("keydown", flush, true);
+				} catch {
+					chimeQueued = false;
+				}
+			};
+			const playChime = (device) => {
+				const mirror = scope.getSnapshot();
+				const value = mirror && mirror.value;
+				const mode = value && typeof value.sound === "string" ? value.sound : "browser";
+				// "Windows + устройство" renders on the picked MCI device (the
+				// saved one, or an explicit probe); "Процесс Windows" ignores the
+				// device and plays on the system default, so the per-app router
+				// can map powershell.exe wherever (the text-reader workflow).
+				const chosen = mode === "wav" ? (typeof device === "string" && device !== "" ? device
+					: value && typeof value.device === "string" ? value.device : "") : "";
+				const viaServer = () => {
+					try {
+						fetch("/agents-board/chime" + (chosen !== "" ? "?device=" + encodeURIComponent(chosen) : ""), { method: "GET", keepalive: true }).catch(() => {});
+					} catch {
+						// No fetch: silence.
+					}
+				};
+				if (mode === "wav" || mode === "process") { viaServer(); return; }
+				try {
+					const audio = new Audio("/agents-board/chime.wav");
+					// Strong ref until done: a GC'd element can drop the playback
+					// (the Chrome lesson from text-reader utterances).
+					chimeRefs.add(audio);
+					const drop = () => chimeRefs.delete(audio);
+					audio.onended = drop;
+					audio.onerror = () => { drop(); viaServer(); };
+					const begin = () => {
+						try {
+							const started = audio.play();
+							if (started !== undefined && started !== null && typeof started.catch === "function") {
+								started.catch((error) => {
+									drop();
+									// A freshly reloaded page cannot start audible audio
+									// until its first user gesture: queue one ding for
+									// the next click/keypress instead of dropping the
+									// completion alert entirely.
+									if (error && error.name === "NotAllowedError") queueChimeReplay();
+									else viaServer();
+								});
+							}
+						} catch {
+							drop();
+							viaServer();
+						}
+					};
+					begin();
+				} catch {
+					viaServer();
+				}
+			};
+			const notifyFinish = (row, replayed, kind) => {
+				const mirror = scope.getSnapshot();
+				const value = mirror && mirror.value;
+				if (!value || value.notify !== true) return;
+				const stats = row.projectionValues && row.projectionValues.sessionStats;
+				const steps = stats && typeof stats.steps === "number" ? stats.steps : -1;
+				if (replayed === true) {
+					// A resync can re-arm the manager bit for a completion the user
+					// has already been alerted about; only grown steps prove a new
+					// finish. Fresh running→idle edges are trusted as-is.
+					const last = alertedSteps.get(row.id);
+					if (steps >= 0 && typeof last === "number" && steps <= last) return;
+				}
+				if (steps >= 0) alertedSteps.set(row.id, steps);
+				if (!shouldAlert(row.id)) return;
+				pushToast(row.id, row.displayTitle || row.id, kind);
+				playChime();
+			};
+			ctx.effect(() => {
+				const listStore = ctx.sessions.list;
+				if (listStore === undefined || typeof listStore.subscribe !== "function" || typeof listStore.getSnapshot !== "function") return;
+				const onChange = () => {
+					try {
+						const snapshot = listStore.getSnapshot();
+						const byId = snapshot.byId || {};
+						const seen = new Set();
+						for (const id of snapshot.ids || []) {
+							const row = byId[id];
+							if (!row || row.blank === true || row.origin === "subagent") continue;
+							seen.add(id);
+							const stats = row.projectionValues && row.projectionValues.sessionStats;
+							const steps = stats && typeof stats.steps === "number" ? stats.steps : 0;
+							if (!(donePeak.get(id) >= steps)) donePeak.set(id, steps);
+							// Viewing counts as seen no matter which surface opened it.
+							if (snapshot.current === id && row.completed === true) doneSeen.set(id, steps);
+							// Own running→idle edge: covers EVERY completion, including
+							// the session the user is watching (the manager bit skips
+							// selected sessions - that was the muted-completion bug).
+							const isRunning = row.running === true;
+							if (runningPrev.get(id) === true && isRunning === false) notifyFinish(row, false);
+							runningPrev.set(id, isRunning);
+							// The manager bit still covers completions whose running
+							// frames were never observed (finish while disconnected).
+							if (row.completed === true && !armed.has(id)) {
+								armed.add(id);
+								notifyFinish(row, true);
+							}
+						}
+						for (const id of Array.from(runningPrev.keys())) {
+							if (!seen.has(id)) runningPrev.delete(id);
+						}
+						for (const id of Array.from(armed)) {
+							if (!seen.has(id)) armed.delete(id);
+						}
+					} catch {
+						// Mirror hiccup: the next update retries.
+					}
+				};
+				onChange();
+				return listStore.subscribe(onChange);
+			}, "agents-board: completion notifications");
 			const face = () => ({
-				hooks: { board: scope, view },
+				hooks: { board: scope, view, toasts },
 				actions
 			});
-			ctx.slots.inject("shell.overlay", () => ctx.slots.register({
+			// Every slot registration is contained: a failure must cost the
+			// board its surface, never the whole client entry (whose rejection
+			// the web shell treats as fatal).
+			const safeSlot = (slot, maker) => ctx.slots.inject(slot, () => {
+				try {
+					return maker();
+				} catch (error) {
+					console.error("agents-board: slot registration failed (" + slot + "); the board starts without it.", error);
+				}
+			});
+			safeSlot("shell.overlay", () => ctx.slots.register({
 				name: "shell.overlay",
 				id: "agents-board-overlay",
 				order: 40,
 				locale: NS,
 				inject: face
 			}, BoardOverlay));
-			ctx.slots.inject("sidebar.footer.action", () => ctx.slots.register({
+			safeSlot("shell.overlay", () => ctx.slots.register({
+				name: "shell.overlay",
+				id: "agents-board-toast",
+				order: 41,
+				locale: NS,
+				inject: face
+			}, ToastView));
+			safeSlot("sidebar.footer.action", () => ctx.slots.register({
 				name: "sidebar.footer.action",
 				id: "agents-board-button",
 				order: 10,
 				locale: NS,
 				inject: face
 			}, BoardButton));
-			ctx.slots.inject("settings.plugin.item", () => ctx.slots.register({
+			safeSlot("settings.plugin.item", () => ctx.slots.register({
 				name: "settings.plugin.item",
 				key: NS,
 				locale: NS,
 				inject: face
 			}, BoardSettingsCard));
+		}
+		/**
+		 * Fail-safe wrapper: a broken board must never fail the client module
+		 * entry - the web shell treats a rejected activation as fatal and
+		 * would not mount the application at all. The board simply stays off.
+		 */
+		function apply(ctx) {
+			try {
+				return applyBoard(ctx);
+			} catch (error) {
+				console.error("agents-board: client startup failed; the board stays off.", error);
+			}
 		}
 		//#endregion
 		exports.apply = apply;
@@ -1001,3 +1428,4 @@ window.__ModuleLoader__.load({
 		return module.exports;
 	}
 });
+// republished 1.24.0 (bundle snapshot repair)

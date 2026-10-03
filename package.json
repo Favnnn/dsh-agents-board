@@ -1,6 +1,6 @@
 {
 	"name": "dsh-agents-board",
-	"version": "1.13.3",
+	"version": "1.24.6",
 	"private": true,
 	"type": "module",
 	"dsh": {
