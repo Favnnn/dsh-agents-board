@@ -6,10 +6,18 @@ window.__ModuleLoader__.load({
 		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 		let react = require("react");
 		let store = require("@deepseek-ai/dsh-client-store");
-		let primitives = require("@deepseek-ai/dsh-client-ui-primitives");
+		/** Contained: a missing primitives package must cost the board its
+		 * themed bits, not the whole bundle (the static externals table is
+		 * harness-owned and may change). */
+		let primitives = {};
+		try {
+			primitives = require("@deepseek-ai/dsh-client-ui-primitives") || {};
+		} catch {
+			// Fall through to the board-owned fallbacks below.
+		}
 
 		//#region stylesheet
-		const css = ".aboard-backdrop{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent)}.aboard-panel{position:absolute;display:flex;flex-direction:column;box-sizing:border-box;padding:14px 16px 16px;background:var(--dsw-specific-menu);border:1px solid var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent);border-radius:20px;--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2)}.aboard-header{display:flex;align-items:center;gap:12px;flex:none;padding-bottom:10px;cursor:move;user-select:none;touch-action:none}.aboard-title{margin:0;font-size:14px;font-weight:600;line-height:20px;color:var(--dsw-alias-label-primary)}.aboard-counters{display:flex;flex:1;gap:6px;flex-wrap:wrap;min-width:0}.aboard-counter{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:999px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-secondary);font-size:12px;line-height:20px;white-space:nowrap}.aboard-counter svg{flex:none}.aboard-close{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer}.aboard-close:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;flex:1}.aboard-column{display:flex;flex-direction:column;min-height:0;gap:6px}.aboard-columnHead{flex:none;display:flex;align-items:center;gap:6px;padding:0 2px;font-size:12px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-secondary)}.aboard-columnCount{color:var(--dsw-alias-label-tertiary);font-weight:400}.aboard-columnBody{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px}.aboard-empty{margin:6px 2px;font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}.aboard-card{position:relative;display:flex;flex-direction:column;gap:4px;align-items:stretch;width:100%;text-align:left;padding:8px 10px;border:1px solid var(--dsw-alias-border-l3);border-radius:10px;background:0 0;cursor:pointer;flex:none}.aboard-card:hover{background:var(--dsw-alias-fill-l2)}.aboard-card.aboard-cardWaiting{background:color-mix(in srgb,var(--dsw-alias-state-error-primary) 18%,transparent)}.aboard-card.aboard-cardWaiting:hover{background:color-mix(in srgb,var(--dsw-alias-state-error-primary) 30%,transparent)}.aboard-card.aboard-cardFinished{background:color-mix(in srgb,var(--dsw-alias-state-success-primary) 18%,transparent)}.aboard-card.aboard-cardFinished:hover{background:color-mix(in srgb,var(--dsw-alias-state-success-primary) 30%,transparent)}.aboard-cardTitleRow{display:flex;align-items:center;gap:6px;min-width:0}.aboard-cardName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-cardPending{flex:none;font-size:11px;line-height:16px;color:var(--dsw-alias-state-warn-primary)}.aboard-cardMeta{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11px;line-height:16px;color:var(--dsw-alias-label-tertiary);font-family:var(--dsw-font-mono)}.aboard-cardContext{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary);font-family:var(--dsw-font-mono)}.aboard-cardSub{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary)}.aboard-cardMode{flex:none;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;line-height:16px;color:var(--dsw-alias-label-secondary);border:1px solid var(--dsw-alias-border-l3);border-radius:999px;padding:0 6px;transition:margin-left .18s ease}.aboard-progress{display:block;height:4px;border-radius:999px;background:color-mix(in srgb,var(--dsw-alias-label-tertiary) 30%,transparent);overflow:hidden}.aboard-progressFill{display:block;height:100%;border-radius:999px;transition:width .2s ease}.aboard-progressOk{background:var(--dsw-alias-state-success-primary)}.aboard-progressWarn{background:var(--dsw-alias-state-warn-primary)}.aboard-progressHot{background:var(--dsw-alias-state-error-primary)}.aboard-cardActions{flex:none;display:flex;align-items:center;gap:4px;overflow:hidden;max-width:0;opacity:0;margin-left:-6px;transition:max-width .18s ease,opacity .18s ease,margin-left .18s ease}.aboard-card:hover .aboard-cardActions,.aboard-card:focus-visible .aboard-cardActions,.aboard-card:focus-within .aboard-cardActions{max-width:96px;opacity:1;margin-left:0}.aboard-cardAction{display:inline-flex;align-items:center;height:18px;padding:0 7px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:var(--dsw-specific-menu);color:var(--dsw-alias-label-secondary);font-size:10px;line-height:16px;cursor:pointer;white-space:nowrap;opacity:0;transition:opacity .12s ease .06s}.aboard-card:hover .aboard-cardAction,.aboard-card:focus-visible .aboard-cardAction,.aboard-card:focus-within .aboard-cardAction{opacity:1}.aboard-cardAction:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-hiddenBar{flex:none;display:flex;justify-content:flex-start;padding:0 2px}.aboard-hiddenToggle{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border:1px dashed var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:20px;cursor:pointer}.aboard-hiddenToggle:hover{color:var(--dsw-alias-label-secondary)}.aboard-hiddenDivider{display:flex;align-items:center;gap:8px;padding:2px 2px;color:var(--dsw-alias-label-tertiary);font-size:10px;line-height:14px;letter-spacing:.4px;text-transform:uppercase;user-select:none}.aboard-hiddenDivider::before,.aboard-hiddenDivider::after{content:'';flex:1;height:1px;background:var(--dsw-alias-border-l2)}.aboard-grip{position:absolute;z-index:2;touch-action:none}.aboard-gripE{top:0;right:0;bottom:0;width:6px;cursor:ew-resize}.aboard-gripS{left:0;right:0;bottom:0;height:6px;cursor:ns-resize}.aboard-gripSe{right:0;bottom:0;width:16px;height:16px;cursor:nwse-resize;border-bottom-right-radius:16px;background:repeating-linear-gradient(-45deg,transparent 0 4px,var(--dsw-alias-label-tertiary) 4px 5px);opacity:.4}.aboard-button{display:inline-flex;align-items:center;gap:8px;min-height:28px;padding:3px 6px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer;font-size:12px;line-height:18px}.aboard-button:hover{color:var(--dsw-alias-label-secondary)}.aboard-buttonLabel{white-space:nowrap}.aboard-settings{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px}.aboard-settingsText{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}.aboard-settingsTitle{margin:0;font-size:13px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-settingsDesc{margin:0;font-size:12px;line-height:16px;color:var(--dsw-alias-label-tertiary)}.aboard-settingsControls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.aboard-languageRow{display:flex;align-items:center;gap:8px}.aboard-languageLabel{font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}.aboard-segmented{display:inline-flex;align-items:stretch;border:1px solid var(--dsw-alias-border-l3);border-radius:8px;background:var(--dsw-alias-fill-l2);padding:2px;gap:2px}.aboard-segment{border:0;border-radius:6px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:18px;padding:0 10px;cursor:pointer;white-space:nowrap}.aboard-segment:hover{color:var(--dsw-alias-label-secondary)}.aboard-segmentActive{background:var(--dsw-specific-menu);color:var(--dsw-alias-label-primary)}.aboard-notifyCol{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.aboard-select{height:22px;max-width:190px;padding:0 6px;border:1px solid var(--dsw-alias-border-l3);border-radius:6px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-primary);font-size:11px;line-height:18px}.aboard-testButton{height:22px;padding:0 10px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-secondary);font-size:11px;line-height:20px;cursor:pointer;white-space:nowrap}.aboard-testButton:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-notifyHint{max-width:280px;text-align:right;font-size:11px;line-height:14px;color:var(--dsw-alias-label-tertiary)}.aboard-toasts{position:fixed;right:18px;bottom:150px;z-index:95;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}.aboard-toast{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:2px;max-width:min(340px,70vw);padding:8px 12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px;background:var(--dsw-specific-menu);box-shadow:var(--dsw-elevation-prominent);cursor:pointer;text-align:left;animation:aboard-toastIn .18s ease}.aboard-toast:hover{background:var(--dsw-alias-fill-l2)}@keyframes aboard-toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.aboard-toastTitle{font-size:11px;line-height:14px;font-weight:600;color:var(--dsw-alias-state-success-primary)}.aboard-toastBody{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:16px;color:var(--dsw-alias-label-primary)}.aboard-segment:disabled{cursor:default;opacity:.5}.aboard-switch{position:relative;flex:none;width:34px;height:18px;border-radius:999px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-fill-l2);cursor:pointer;padding:0;transition:background .15s,border-color .15s}.aboard-switch[aria-checked='true']{background:var(--dsw-alias-state-success-primary);border-color:var(--dsw-alias-state-success-primary)}.aboard-switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:999px;background:var(--dsw-alias-label-tertiary);opacity:1;transition:transform .15s,background .15s}.aboard-switch[aria-checked='true']::after{transform:translateX(16px);background:var(--dsw-specific-menu);opacity:1}.aboard-switch:disabled{opacity:.45;cursor:default}";
+		const css = ".aboard-backdrop{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:var(--dsw-alias-bg-mask-3,rgba(0,0,0,0.48))}.aboard-panel{position:absolute;display:flex;flex-direction:column;box-sizing:border-box;padding:14px 16px 16px;background:linear-gradient(var(--dsw-specific-menu),var(--dsw-specific-menu)) var(--dsw-alias-bg-layer-1,#f8f9fa);border:1px solid var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent);border-radius:20px;--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2)}.aboard-header{display:flex;align-items:center;gap:12px;flex:none;padding-bottom:10px;cursor:move;user-select:none;touch-action:none}.aboard-title{margin:0;font-size:14px;font-weight:600;line-height:20px;color:var(--dsw-alias-label-primary)}.aboard-counters{display:flex;flex:1;gap:6px;flex-wrap:wrap;min-width:0}.aboard-counter{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:999px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-secondary);font-size:12px;line-height:20px;white-space:nowrap}.aboard-counter svg{flex:none}.aboard-close{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer}.aboard-close:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;flex:1}.aboard-column{display:flex;flex-direction:column;min-height:0;gap:6px}.aboard-columnHead{flex:none;display:flex;align-items:center;gap:6px;padding:0 2px;font-size:12px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-secondary)}.aboard-columnCount{color:var(--dsw-alias-label-tertiary);font-weight:400}.aboard-columnBody{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px}.aboard-empty{margin:6px 2px;font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}.aboard-card{position:relative;display:flex;flex-direction:column;gap:4px;align-items:stretch;width:100%;text-align:left;padding:8px 10px;border:1px solid var(--dsw-alias-border-l3);border-radius:10px;background:0 0;cursor:pointer;flex:none}.aboard-card:hover{background:var(--dsw-alias-fill-l2)}.aboard-card.aboard-cardWaiting{background:color-mix(in srgb,var(--dsw-alias-state-warn-primary) 20%,transparent)}.aboard-card.aboard-cardWaiting:hover{background:color-mix(in srgb,var(--dsw-alias-state-warn-primary) 32%,transparent)}.aboard-card.aboard-cardFinished{background:color-mix(in srgb,var(--dsw-alias-state-success-primary) 18%,transparent)}.aboard-card.aboard-cardFinished:hover{background:color-mix(in srgb,var(--dsw-alias-state-success-primary) 30%,transparent)}.aboard-cardTitleRow{display:flex;align-items:center;gap:6px;min-width:0}.aboard-cardName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-cardPending{flex:none;font-size:11px;line-height:16px;color:var(--dsw-alias-state-warn-primary)}.aboard-cardMeta{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11px;line-height:16px;color:var(--dsw-alias-label-tertiary);font-family:var(--dsw-font-mono)}.aboard-cardContext{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary);font-family:var(--dsw-font-mono)}.aboard-cardSub{font-size:11px;line-height:16px;color:var(--dsw-alias-label-secondary)}.aboard-cardMode{flex:none;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;line-height:16px;color:var(--dsw-alias-label-secondary);border:1px solid var(--dsw-alias-border-l3);border-radius:999px;padding:0 6px;transition:margin-left .18s ease}.aboard-progress{display:block;height:4px;border-radius:999px;background:color-mix(in srgb,var(--dsw-alias-label-tertiary) 30%,transparent);overflow:hidden}.aboard-progressFill{display:block;height:100%;border-radius:999px;transition:width .2s ease}.aboard-progressOk{background:var(--dsw-alias-state-success-primary)}.aboard-progressWarn{background:var(--dsw-alias-state-warn-primary)}.aboard-progressHot{background:var(--dsw-alias-state-error-primary)}.aboard-cardActions{flex:none;display:flex;align-items:center;gap:4px;overflow:hidden;max-width:0;opacity:0;margin-left:-6px;transition:max-width .18s ease,opacity .18s ease,margin-left .18s ease}.aboard-card:hover .aboard-cardActions,.aboard-card:focus-visible .aboard-cardActions,.aboard-card:focus-within .aboard-cardActions{max-width:96px;opacity:1;margin-left:0}.aboard-cardAction{display:inline-flex;align-items:center;height:18px;padding:0 7px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:var(--dsw-specific-menu);color:var(--dsw-alias-label-secondary);font-size:10px;line-height:16px;cursor:pointer;white-space:nowrap;opacity:0;transition:opacity .12s ease .06s}.aboard-card:hover .aboard-cardAction,.aboard-card:focus-visible .aboard-cardAction,.aboard-card:focus-within .aboard-cardAction{opacity:1}.aboard-cardAction:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-hiddenBar{flex:none;display:flex;justify-content:flex-start;padding:0 2px}.aboard-hiddenToggle{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border:1px dashed var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:20px;cursor:pointer}.aboard-hiddenToggle:hover{color:var(--dsw-alias-label-secondary)}.aboard-hiddenDivider{display:flex;align-items:center;gap:8px;padding:2px 2px;color:var(--dsw-alias-label-tertiary);font-size:10px;line-height:14px;letter-spacing:.4px;text-transform:uppercase;user-select:none}.aboard-hiddenDivider::before,.aboard-hiddenDivider::after{content:'';flex:1;height:1px;background:var(--dsw-alias-border-l2)}.aboard-grip{position:absolute;z-index:2;touch-action:none}.aboard-gripE{top:0;right:0;bottom:0;width:6px;cursor:ew-resize}.aboard-gripS{left:0;right:0;bottom:0;height:6px;cursor:ns-resize}.aboard-gripSe{right:0;bottom:0;width:16px;height:16px;cursor:nwse-resize;border-bottom-right-radius:16px;background:repeating-linear-gradient(-45deg,transparent 0 4px,var(--dsw-alias-label-tertiary) 4px 5px);opacity:.4}.aboard-button{display:inline-flex;align-items:center;gap:8px;min-height:28px;padding:3px 6px;border:0;border-radius:8px;background:0 0;color:var(--dsw-alias-label-tertiary);cursor:pointer;font-size:12px;line-height:18px}.aboard-button:hover{color:var(--dsw-alias-label-secondary)}.aboard-buttonLabel{white-space:nowrap}.aboard-settings{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px}.aboard-settingsText{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}.aboard-settingsTitle{margin:0;font-size:13px;font-weight:600;line-height:18px;color:var(--dsw-alias-label-primary)}.aboard-settingsDesc{margin:0;font-size:12px;line-height:16px;color:var(--dsw-alias-label-tertiary)}.aboard-settingsControls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.aboard-languageRow{display:flex;align-items:center;gap:8px}.aboard-languageLabel{font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}.aboard-segmented{display:inline-flex;align-items:stretch;border:1px solid var(--dsw-alias-border-l3);border-radius:8px;background:var(--dsw-alias-fill-l2);padding:2px;gap:2px}.aboard-segment{border:0;border-radius:6px;background:0 0;color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:18px;padding:0 10px;cursor:pointer;white-space:nowrap}.aboard-segment:hover{color:var(--dsw-alias-label-secondary)}.aboard-segmentActive{background:var(--dsw-specific-menu);color:var(--dsw-alias-label-primary)}.aboard-notifyCol{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.aboard-select{height:22px;max-width:190px;padding:0 6px;border:1px solid var(--dsw-alias-border-l3);border-radius:6px;background:var(--dsw-alias-fill-l2);color:var(--dsw-alias-label-primary);font-size:11px;line-height:18px}.aboard-testButton{height:22px;padding:0 10px;border:1px solid var(--dsw-alias-border-l2);border-radius:999px;background:0 0;color:var(--dsw-alias-label-secondary);font-size:11px;line-height:20px;cursor:pointer;white-space:nowrap}.aboard-testButton:hover{color:var(--dsw-alias-label-primary);background:var(--dsw-alias-fill-l2)}.aboard-notifyHint{max-width:280px;text-align:right;font-size:11px;line-height:14px;color:var(--dsw-alias-label-tertiary)}.aboard-toasts{position:fixed;right:18px;bottom:150px;z-index:95;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}.aboard-toast{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:2px;max-width:min(340px,70vw);padding:8px 12px;border:1px solid var(--dsw-alias-border-l3);border-radius:12px;background:linear-gradient(var(--dsw-specific-menu),var(--dsw-specific-menu)) var(--dsw-alias-bg-layer-1,#f8f9fa);box-shadow:var(--dsw-elevation-prominent);cursor:pointer;text-align:left;animation:aboard-toastIn .18s ease}.aboard-toast:hover{background:var(--dsw-alias-fill-l2)}@keyframes aboard-toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.aboard-toastTitle{font-size:11px;line-height:14px;font-weight:600;color:var(--dsw-alias-state-success-primary)}.aboard-toastBody{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:16px;color:var(--dsw-alias-label-primary)}.aboard-segment:disabled{cursor:default;opacity:.5}.aboard-switch{position:relative;flex:none;width:34px;height:18px;border-radius:999px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-fill-l2);cursor:pointer;padding:0;transition:background .15s,border-color .15s}.aboard-switch[aria-checked='true']{background:var(--dsw-alias-state-success-primary);border-color:var(--dsw-alias-state-success-primary)}.aboard-switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:999px;background:var(--dsw-alias-label-tertiary);opacity:1;transition:transform .15s,background .15s}.aboard-switch[aria-checked='true']::after{transform:translateX(16px);background:var(--dsw-specific-menu);opacity:1}.aboard-switch:disabled{opacity:.45;cursor:default}";
 		const tagId = "dsh-agents-board/board.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
@@ -20,7 +28,54 @@ window.__ModuleLoader__.load({
 		}
 		//#endregion
 		//#region lib/types/client/board-model.js
-		const { StateDot, IconCloseOutline16 } = primitives;
+		/** Board-owned close icon. rc.2 renamed primitives'
+		 * IconCloseOutline16 to IconCloseOutline{Regular,Medium}; the old
+		 * destructure yielded undefined, createElement(undefined) raised
+		 * React #130 and the panel's slot entry crashed — the board could not
+		 * open at all. The X no longer comes from the harness package. */
+		function IconClose(props) {
+			const size = props.size || 16;
+			return react.createElement("svg", {
+				width: size,
+				height: size,
+				viewBox: "0 0 16 16",
+				fill: "none",
+				"aria-hidden": true,
+				focusable: false,
+				style: { display: "block" }
+			}, react.createElement("path", {
+				d: "M3.5 3.5 L12.5 12.5 M12.5 3.5 L3.5 12.5",
+				stroke: "currentColor",
+				strokeWidth: 1.3,
+				strokeLinecap: "round"
+			}));
+		}
+		/** Board-owned state dot, used only when the harness primitives stop
+		 * exporting StateDot (rename protection — the Switch lesson). Colors
+		 * carry theme-token fallbacks; the shipped StateDot stays the first
+		 * choice because it is theme-exact. */
+		const LOCAL_DOT_COLORS = {
+			done: "var(--dsw-state-dot-success, #2e9e63)",
+			warning: "var(--dsw-state-dot-warning, #d9a514)",
+			ongoing: "var(--dsw-state-dot-info, #4c9aff)",
+			error: "var(--dsw-state-dot-error, #d64550)",
+			idle: "var(--dsw-state-dot-idle, #9898a3)"
+		};
+		function LocalStateDot(props) {
+			const size = props.size || 10;
+			return react.createElement("span", {
+				"aria-hidden": true,
+				style: {
+					display: "inline-block",
+					flex: "none",
+					width: size + "px",
+					height: size + "px",
+					borderRadius: "50%",
+					background: LOCAL_DOT_COLORS[props.state] || LOCAL_DOT_COLORS.idle
+				}
+			});
+		}
+		const { StateDot = LocalStateDot } = primitives;
 		/** Self-contained toggle switch. The harness primitives package no
 		 * longer ships a Switch component; destructuring it yielded undefined,
 		 * the settings card then called createElement(undefined) and React
@@ -440,6 +495,8 @@ window.__ModuleLoader__.load({
 			"time.date": "{date}",
 			"settings.title": "Agents board",
 			"settings.description": "Sidebar button and overlay panel listing every agent: steps, context, tokens, subagents.",
+			"settings.loading": "Loading settings…",
+			"settings.unavailable": "Settings are unavailable on this connection.",
 			"settings.switch": "Show the agents board",
 			"settings.language": "Language",
 			"settings.languageAuto": "Auto",
@@ -490,6 +547,8 @@ window.__ModuleLoader__.load({
 			"time.date": "{date}",
 			"settings.title": "Доска агентов",
 			"settings.description": "Кнопка в сайдбаре и панель со всеми агентами: шаги, контекст, токены, субагенты.",
+			"settings.loading": "Загрузка настроек…",
+			"settings.unavailable": "Настройки недоступны на этом соединении.",
 			"settings.switch": "Показывать доску агентов",
 			"settings.language": "Язык",
 			"settings.languageAuto": "Авто",
@@ -509,6 +568,46 @@ window.__ModuleLoader__.load({
 		//#region lib/types/client/components.js
 		/** Stable empty map identity for sessions snapshots without pending interactions. */
 		const NO_PENDING = new Map();
+		/** rc.2 pending map: the shell's `useSessionPendingInteraction` dispatch
+		 * hook is gone, and UiSession now folds `pendingInteraction` into each
+		 * session row. Fold the rows back into the Map the board consumes. */
+		function pendingFromRows(list) {
+			const byId = list && list.byId;
+			const ids = (list && list.ids) || [];
+			const map = new Map();
+			for (const id of ids) {
+				const row = byId && byId[id];
+				if (row && row.pendingInteraction) map.set(id, row.pendingInteraction);
+			}
+			return map;
+		}
+		/** rc.2 pending map, primary source: the standard `sessionStatus` root
+		 * hook returns a Map<id, {running, pendingInteraction, completionUnread}>
+		 * maintained by the uiSession service. Collect the entries that carry a
+		 * pending interaction. */
+		function pendingFromStatus(status) {
+			const map = new Map();
+			if (status instanceof Map) {
+				for (const [id, s] of status) {
+					if (s && s.pendingInteraction) map.set(id, s.pendingInteraction);
+				}
+			}
+			return map;
+		}
+		/** rc.2 "finished while unviewed" set: the uiSession service maintains
+		 * `completionUnread` per session - set when a session finishes outside
+		 * the one being viewed, cleared once that session is opened. This is
+		 * the board's green "fresh finish" flag (rc.2 no longer exposes the
+		 * manager's per-row completed bit). */
+		function unreadFromStatus(status) {
+			const map = new Map();
+			if (status instanceof Map) {
+				for (const [id, s] of status) {
+					if (s && s.completionUnread) map.set(id, s.completionUnread);
+				}
+			}
+			return map;
+		}
 		/** Pick the dictionary for an explicit language; falls back to English. */
 		function makeT(lang) {
 			const dict = lang === "ru" ? ru : en;
@@ -545,9 +644,9 @@ window.__ModuleLoader__.load({
 		 * One session card: 1) title 2) data 3) context percent 4) progress bar.
 		 * The bar renders on every card; an unmeasured session shows an empty track.
 		 * Hover actions: archive (done cards) / unhide (archive cards).
-		 * @param {object} props - { row, t, list, pending, descendants, actions, isArchived }
+		 * @param {object} props - { row, t, list, pending, unread, descendants, actions, isArchived }
 		 */
-		function EntryCard({ row, t, list, pending, descendants, actions, isArchived, hiddenSet, showingHidden, restoredSet, onRestored, exitingSet }) {
+		function EntryCard({ row, t, list, pending, unread, descendants, actions, isArchived, hiddenSet, showingHidden, restoredSet, onRestored, exitingSet }) {
 			const values = row.projectionValues || {};
 			const stats = values.sessionStats;
 			const percent = contextPercent(values.contextPressure);
@@ -592,25 +691,31 @@ window.__ModuleLoader__.load({
 				return cancel === null ? undefined : cancel;
 			}, [isExiting]);
 			const isWaiting = pending.has(row.id);
-			// The green mark is the session manager's own completed bit (the same
-			// signal the sidebar dot reads). A page resync can re-arm the bit for
-			// an already-viewed completion, so the fill also requires unseen
-			// steps: a genuinely new finish always adds assistant steps, a
-			// replayed bit does not.
+			// The green mark is "finished and not yet seen": the uiSession
+			// service's completionUnread flag (rc.2 dropped the manager's
+			// per-row completed bit this replaces). The service clears the flag
+			// once the session becomes the viewed one, and a page resync cannot
+			// re-arm it for an already-seen completion. The legacy completed-bit
+			// path stays as a guarded fallback for older shells.
+			const isUnread = unread instanceof Map ? unread.has(row.id) : false;
 			const rowSteps = stats && typeof stats.steps === "number" ? stats.steps : 0;
 			const seenSteps = actions.doneSeen ? actions.doneSeen.get(row.id) : undefined;
 			const peakSteps = actions.donePeak ? actions.donePeak.get(row.id) : undefined;
 			const freshSteps = Math.max(typeof peakSteps === "number" ? peakSteps : 0, rowSteps);
-			const isFreshFinish = !isWaiting && !isArchived && row.completed === true
-				&& (!(typeof seenSteps === "number") || seenSteps < freshSteps);
+			const isFreshFinish = !isWaiting && !isArchived && (isUnread
+				|| (row.completed === true
+					&& (!(typeof seenSteps === "number") || seenSteps < freshSteps)));
 			return react.createElement("button", {
 				type: "button",
 				ref: cardRef,
+				// Green tint = finished and not yet seen; amber tint = awaiting
+				// the user's reply. A running task deliberately stays neutral -
+				// the animated status dot marks it, the column it sits in.
 				className: isWaiting ? "aboard-card aboard-cardWaiting" : isFreshFinish ? "aboard-card aboard-cardFinished" : "aboard-card",
 				onClick: () => actions.openSession(row.id)
 			},
 				react.createElement("span", { className: "aboard-cardTitleRow" },
-					react.createElement(StateDot, { state: isArchived ? "idle" : row.running ? "ongoing" : "done", size: 8 }),
+					react.createElement(StateDot, { state: isArchived ? "idle" : isWaiting ? "warning" : row.running ? "ongoing" : "done", size: 8 }),
 					react.createElement("span", { className: "aboard-cardName", title: row.displayTitle }, row.displayTitle),
 					pending.has(row.id) ? react.createElement("span", { className: "aboard-cardPending" }, t("card.waiting")) : null,
 					typeof values.agentPreset === "string" && values.agentPreset !== "" ? react.createElement("span", {
@@ -681,6 +786,7 @@ window.__ModuleLoader__.load({
 					t: cardProps.t,
 					list: cardProps.list,
 					pending: cardProps.pending,
+					unread: cardProps.unread,
 					descendants: cardProps.descendants,
 					actions: cardProps.actions,
 					hiddenSet,
@@ -717,7 +823,21 @@ window.__ModuleLoader__.load({
 		function BoardSurface(props) {
 			const list = props.useSessions(identity);
 			const workspaces = props.useWorkspaces(identity);
-			const pending = props.useSessionPendingInteraction(identity) || NO_PENDING;
+			// rc.2 pending source: the standard sessionStatus root hook (fed to
+			// every slot component by the uiSession service) - a Map of
+			// {running, pendingInteraction, completionUnread} per session. The
+			// rc.1 dispatch hook and the row field are guarded fallbacks.
+			const status = typeof props.useSessionStatus === "function"
+				? props.useSessionStatus((value) => value)
+				: null;
+			const pending = status ? pendingFromStatus(status)
+				: typeof props.useSessionPendingInteraction === "function"
+					? (props.useSessionPendingInteraction(identity) || NO_PENDING)
+					: pendingFromRows(list);
+			// Finished-and-not-yet-seen: the service clears completionUnread
+			// once the session becomes the viewed one, so this flag IS the
+			// board's "fresh finish" green.
+			const unread = unreadFromStatus(status);
 			const board = props.useBoard(identity);
 			const t = resolveT(board, props.t);
 			const [layout, setLayout] = react.useState(() => readLayout() || defaultLayout());
@@ -808,6 +928,7 @@ window.__ModuleLoader__.load({
 				t,
 				list,
 				pending,
+				unread,
 				descendants: model.descendants,
 				// archiveSession comes from the inject face (apply); hideSession is view-local.
 				actions: {
@@ -889,7 +1010,7 @@ window.__ModuleLoader__.load({
 							className: "aboard-close",
 							"aria-label": t("board.close"),
 							onClick: props.actions.closeBoard
-						}, react.createElement(IconCloseOutline16, { size: 16 }))
+						}, react.createElement(IconClose, { size: 16 }))
 					),
 					react.createElement("div", { className: "aboard-columns" },
 						react.createElement(Column, { titleKey: "col.running", emptyKey: "col.empty", rows: visible.columns.running, isArchived: false, ...cardProps }),
@@ -941,8 +1062,16 @@ window.__ModuleLoader__.load({
 				props.wide ? react.createElement("span", { className: "aboard-buttonLabel" }, t("board.title")) : null
 			);
 		}
-		/** Settings → Plugins card: language, board switch, notifications, audio output. */
-		function BoardSettingsCard(props) {
+		/** Plugins-page configuration (`plugins.bundle.config`, keyed by the
+		 * package name): the settings that used to live on the Settings →
+		 * Plugins card — language, completion alerts, audio output — rendered
+		 * directly on the bundle's page. The dispatched `view` is 'page' (the
+		 * editor); `summary`, if a shell ever asks, renders the one-liner. The
+		 * enable switch is the Plugins row's own native switch, so it is not
+		 * repeated here. Edits apply instantly through the settings mirror —
+		 * the same reactive face the board itself reads, so the button, the
+		 * panel and the alerts pick the new values up without a reload. */
+		function BoardRowConfig(props) {
 			const board = props.useBoard(identity);
 			// WinMM render devices, fetched from the host once notify turns on.
 			const [devices, setDevices] = react.useState(null);
@@ -965,89 +1094,79 @@ window.__ModuleLoader__.load({
 					alive = false;
 				};
 			}, [board.value ? board.value.notify === true : false, devices]);
-			if (board.status !== "ready") return null;
 			const t = resolveT(board, props.t);
-			const enabled = board.value ? board.value.enabled !== false : true;
+			if (props.view === "summary") {
+				return react.createElement(react.Fragment, null, t("settings.description"));
+			}
+			if (board.status !== "ready") {
+				return react.createElement("p", { className: "aboard-settingsDesc" },
+					board.status === "loading" ? t("settings.loading") : t("settings.unavailable"));
+			}
 			const language = board.value && typeof board.value.language === "string" ? board.value.language : "auto";
 			const notifyOn = board.value ? board.value.notify === true : false;
 			const soundMode = board.value && (board.value.sound === "wav" || board.value.sound === "process") ? board.value.sound : "browser";
 			const savedDev = board.value && typeof board.value.device === "string" ? board.value.device : "";
 			const shownDev = probeDev !== null ? probeDev : savedDev;
-			return react.createElement("div", { className: "aboard-settings" },
-				react.createElement("div", { className: "aboard-settingsText" },
-					react.createElement("h3", { className: "aboard-settingsTitle" }, t("settings.title")),
-					react.createElement("p", { className: "aboard-settingsDesc" }, t("settings.description"))
-				),
-				react.createElement("div", { className: "aboard-settingsControls" },
-					react.createElement("div", { className: "aboard-languageRow" },
-						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.language")),
-						react.createElement("div", { className: "aboard-segmented", role: "group", "aria-label": t("settings.language") },
-							["auto", "en", "ru"].map((code) => react.createElement("button", {
-								key: code,
-								type: "button",
-								className: code === language ? "aboard-segment aboard-segmentActive" : "aboard-segment",
-								disabled: board.writable !== true,
-								"aria-pressed": code === language,
-								onClick: () => props.actions.setLanguage(code)
-							}, code === "auto" ? t("settings.languageAuto") : code.toUpperCase()))
-						)
-					),
-					react.createElement("div", { className: "aboard-languageRow" },
-						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.switch")),
-						react.createElement(Switch, {
-							checked: enabled,
-							label: t("settings.switch"),
-							disabled: board.writable !== true,
-							onChange: (next) => props.actions.setEnabled(next)
-						})
-					),
-					react.createElement("div", { className: "aboard-notifyCol" },
-						react.createElement("div", { className: "aboard-languageRow" },
-							react.createElement("span", { className: "aboard-languageLabel" }, t("settings.notify")),
-							react.createElement(Switch, {
-								checked: notifyOn,
-								label: t("settings.notify"),
-								disabled: board.writable !== true,
-								onChange: (next) => props.actions.setNotify(next)
-							})
-						)
-					),
-					notifyOn ? react.createElement("div", { className: "aboard-languageRow" },
-						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.sound")),
-						react.createElement("select", {
-							className: "aboard-select",
-							value: soundMode,
-							disabled: board.writable !== true,
-							onChange: (event) => props.actions.setSound(event.target.value)
-						},
-							react.createElement("option", { value: "browser" }, t("settings.soundBrowser")),
-							react.createElement("option", { value: "wav" }, t("settings.soundWav")),
-							react.createElement("option", { value: "process" }, t("settings.soundProcess"))
-						),
-						react.createElement("button", {
+			return react.createElement("div", { className: "aboard-settingsControls" },
+				react.createElement("div", { className: "aboard-languageRow" },
+					react.createElement("span", { className: "aboard-languageLabel" }, t("settings.language")),
+					react.createElement("div", { className: "aboard-segmented", role: "group", "aria-label": t("settings.language") },
+						["auto", "en", "ru"].map((code) => react.createElement("button", {
+							key: code,
 							type: "button",
-							className: "aboard-testButton",
-							title: t("settings.test"),
-							onClick: () => props.actions.testSound()
-						}, t("settings.test"))
-					) : null,
-					notifyOn && soundMode === "wav" ? react.createElement("div", { className: "aboard-languageRow" },
-						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.device")),
-						react.createElement("select", {
-							className: "aboard-select",
-							value: shownDev,
+							className: code === language ? "aboard-segment aboard-segmentActive" : "aboard-segment",
 							disabled: board.writable !== true,
-							onChange: (event) => {
-								setProbeDev(event.target.value);
-								props.actions.setDevice(event.target.value);
-							}
-						},
-							react.createElement("option", { value: "" }, t("settings.deviceDefault")),
-							(devices || []).map((d) => react.createElement("option", { key: d.id, value: d.id }, d.name)),
-							devices !== null && devices.length === 0 ? react.createElement("option", { value: "-1", disabled: true }, t("settings.deviceNone")) : null
-						)
-					) : null
-				)
+							"aria-pressed": code === language,
+							onClick: () => props.actions.setLanguage(code)
+						}, code === "auto" ? t("settings.languageAuto") : code.toUpperCase()))
+					)
+				),
+				react.createElement("div", { className: "aboard-notifyCol" },
+					react.createElement("div", { className: "aboard-languageRow" },
+						react.createElement("span", { className: "aboard-languageLabel" }, t("settings.notify")),
+						react.createElement(Switch, {
+							checked: notifyOn,
+							label: t("settings.notify"),
+							disabled: board.writable !== true,
+							onChange: (next) => props.actions.setNotify(next)
+						})
+					)
+				),
+				notifyOn ? react.createElement("div", { className: "aboard-languageRow" },
+					react.createElement("span", { className: "aboard-languageLabel" }, t("settings.sound")),
+					react.createElement("select", {
+						className: "aboard-select",
+						value: soundMode,
+						disabled: board.writable !== true,
+						onChange: (event) => props.actions.setSound(event.target.value)
+					},
+						react.createElement("option", { value: "browser" }, t("settings.soundBrowser")),
+						react.createElement("option", { value: "wav" }, t("settings.soundWav")),
+						react.createElement("option", { value: "process" }, t("settings.soundProcess"))
+					),
+					react.createElement("button", {
+						type: "button",
+						className: "aboard-testButton",
+						title: t("settings.test"),
+						onClick: () => props.actions.testSound()
+					}, t("settings.test"))
+				) : null,
+				notifyOn && soundMode === "wav" ? react.createElement("div", { className: "aboard-languageRow" },
+					react.createElement("span", { className: "aboard-languageLabel" }, t("settings.device")),
+					react.createElement("select", {
+						className: "aboard-select",
+						value: shownDev,
+						disabled: board.writable !== true,
+						onChange: (event) => {
+							setProbeDev(event.target.value);
+							props.actions.setDevice(event.target.value);
+						}
+					},
+						react.createElement("option", { value: "" }, t("settings.deviceDefault")),
+						(devices || []).map((d) => react.createElement("option", { key: d.id, value: d.id }, d.name)),
+						devices !== null && devices.length === 0 ? react.createElement("option", { value: "-1", disabled: true }, t("settings.deviceNone")) : null
+					)
+				) : null
 			);
 		}
 		/** In-page completion toasts, lifted clear of the composer; also the
@@ -1112,9 +1231,9 @@ window.__ModuleLoader__.load({
 		//#endregion
 		//#region lib/types/client/index.js
 		const NS = "agents-board";
-		const inject = ["sessions", "slots", "locale", "settingsScope"];
+		const inject = ["sessions", "slots", "locale", "configForms", "uiWorkspace"];
 		/**
-		 * Client plugin body: dictionaries, the settings scope, and three slot
+		 * Client plugin body: dictionaries, the settings scope, and four slot
 		 * registrations sharing one inject face (scope + open-state + actions).
 		 * @param {object} ctx - client plugin context.
 		 */
@@ -1128,7 +1247,11 @@ window.__ModuleLoader__.load({
 			} catch {
 				// Storage disabled: the stale key simply stays unread.
 			}
-			const scope = ctx.settingsScope.bind({ namespace: NS });
+			// rc.2 settings domain: one shared ConfigForm per namespace. Same
+			// reactive face as the old scope ({value, writable} + set), now fed
+			// from the describe mirror over the profile config editor; the form
+			// itself is rendered by the Plugins page from the host Config schema.
+			const scope = ctx.configForms.get(NS);
 			const view = store.createSnapshotStore({ open: false });
 			const actions = {
 				openBoard: () => view.set({ open: true }),
@@ -1153,7 +1276,29 @@ window.__ModuleLoader__.load({
 					toasts.set({ items: cur.items.filter((item) => item.key !== key) });
 				},
 				testSound: (device) => {
-					playChime(device);
+					// The probe now reports its outcome: the server waits for the
+					// render and returns {ok, error?}; a failure surfaces verbatim
+					// instead of the button silently doing nothing.
+					const mirror = scope.getSnapshot();
+					const value = mirror && mirror.value;
+					const mode = value && typeof value.sound === "string" ? value.sound : "browser";
+					const chosen = mode === "wav" ? (typeof device === "string" && device !== "" ? device
+						: value && typeof value.device === "string" ? value.device : "") : "";
+					fetch("/agents-board/chime" + (chosen !== "" ? "?device=" + encodeURIComponent(chosen) : "")).then((r) => r.json()).then((data) => {
+						if (!data || data.ok !== true) {
+							try {
+								window.alert("Проба: звонок не сыграет — " + JSON.stringify(data));
+							} catch {
+								// Alerts blocked: the outcome is in the server log.
+							}
+						}
+					}).catch((error) => {
+						try {
+							window.alert("Проба: запрос не удался — " + String(error && error.message ? error.message : error));
+						} catch {
+							// Alerts blocked: the outcome is in the server log.
+						}
+					});
 				},
 				alertPending: (id) => {
 					try {
@@ -1179,9 +1324,30 @@ window.__ModuleLoader__.load({
 					} catch {
 						// Snapshot hiccup: the green suppression just skips this view.
 					}
-					const address = ctx.sessions.subagentAddress(id);
-					if (address !== undefined) ctx.sessions.openSubagent(address);
-					else ctx.sessions.open(id);
+					// rc.2: sessions.open/openSubagent are gone; the UI open verb is
+					// uiWorkspace.openSession(target), where target is a session id
+					// or a subagent address. subagentAddress survived on the face.
+					let opened = false;
+					try {
+						const ui = ctx.uiWorkspace;
+						if (ui && typeof ui.openSession === "function") {
+							const address = typeof ctx.sessions.subagentAddress === "function" ? ctx.sessions.subagentAddress(id) : undefined;
+							ui.openSession(address !== undefined ? address : id);
+							opened = true;
+						}
+					} catch (error) {
+						console.error("agents-board: openSession failed; the board stays open.", error);
+					}
+					if (!opened) {
+						// Older-runtime fallback: the pre-rc.2 verbs, when they exist.
+						try {
+							const address = typeof ctx.sessions.subagentAddress === "function" ? ctx.sessions.subagentAddress(id) : undefined;
+							if (address !== undefined && typeof ctx.sessions.openSubagent === "function") ctx.sessions.openSubagent(address);
+							else if (typeof ctx.sessions.open === "function") ctx.sessions.open(id);
+						} catch (error) {
+							console.error("agents-board: legacy openSession failed.", error);
+						}
+					}
 					view.set({ open: false });
 				},
 				archiveSession: (id) => {
@@ -1206,6 +1372,13 @@ window.__ModuleLoader__.load({
 			// the composer; no native OS popup (it doubled the alert).
 			const armed = new Set();
 			const runningPrev = new Map();
+			// Sessions currently awaiting the user's reply (approval / plan
+			// review / question). A fresh pending edge alerts exactly like a
+			// completion: sound + toast with the pending title. The first
+			// snapshot only primes the set so already-waiting sessions do not
+			// flood the page at mount.
+			const pendingSeen = new Set();
+			let pendingPrimed = false;
 			const firedAt = new Map();
 			const alertedSteps = new Map();
 			const donePeak = new Map();
@@ -1368,6 +1541,44 @@ window.__ModuleLoader__.load({
 				onChange();
 				return listStore.subscribe(onChange);
 			}, "agents-board: completion notifications");
+			// A fresh pending edge (approval / plan review / question) alerts
+			// like a completion, with the pending toast title. The state lives
+			// in the uiSession service's status snapshot
+			// (Map<id, {running, pendingInteraction, completionUnread}>), NOT on
+			// the sessions rows - read it through ctx.get with an undefined
+			// check; if the service is unavailable the watcher simply is not
+			// installed. The first snapshot only primes the set so already-
+			// waiting sessions do not flood the page at mount.
+			ctx.effect(() => {
+				const ui = typeof ctx.get === "function" ? ctx.get("uiSession") : ctx.uiSession;
+				const status = ui && ui.sessionStatus;
+				if (!status || typeof status.getSnapshot !== "function" || typeof status.subscribe !== "function") return;
+				const onStatus = () => {
+					try {
+						const snap = status.getSnapshot();
+						if (!(snap instanceof Map)) return;
+						for (const [id, s] of snap) {
+							if (!s || !s.pendingInteraction) continue;
+							if (!pendingSeen.has(id)) {
+								pendingSeen.add(id);
+								if (pendingPrimed) {
+									const byId = (ctx.sessions.list.getSnapshot() || {}).byId || {};
+									notifyFinish(byId[id] || { id, displayTitle: id }, false, "pending");
+								}
+							}
+						}
+						for (const id of Array.from(pendingSeen)) {
+							const s = snap.get(id);
+							if (!s || !s.pendingInteraction) pendingSeen.delete(id);
+						}
+						pendingPrimed = true;
+					} catch {
+						// Mirror hiccup: the next update retries.
+					}
+				};
+				onStatus();
+				return status.subscribe(onStatus);
+			}, "agents-board: pending interactions");
 			const face = () => ({
 				hooks: { board: scope, view, toasts },
 				actions
@@ -1403,12 +1614,16 @@ window.__ModuleLoader__.load({
 				locale: NS,
 				inject: face
 			}, BoardButton));
-			safeSlot("settings.plugin.item", () => ctx.slots.register({
-				name: "settings.plugin.item",
-				key: NS,
+			// The Plugins page settings live one level up: directly on the
+			// bundle's page (between its description and its rows), keyed by
+			// the package name — no nested row page. `view` is always 'page'
+			// there; the row's enable/disable switch is the page's own.
+			safeSlot("plugins.bundle.config", () => ctx.slots.register({
+				name: "plugins.bundle.config",
+				key: "dsh-agents-board",
 				locale: NS,
 				inject: face
-			}, BoardSettingsCard));
+			}, BoardRowConfig));
 		}
 		/**
 		 * Fail-safe wrapper: a broken board must never fail the client module
@@ -1428,4 +1643,4 @@ window.__ModuleLoader__.load({
 		return module.exports;
 	}
 });
-// republished 1.24.0 (bundle snapshot repair)
+// republished 1.25.9 (rc.2 port: configForms, bundle-page settings, bundle delivery, opaque panel, sessionStatus pending + completionUnread green)

@@ -1,7 +1,19 @@
-# Agents board - informational copy of the row installed by install.ps1.
-# The live row lives in %DSH_HOME%\profiles\web\cordis.patch.yml and points at
-# the installed copy under %DSH_HOME%\plugins\dsh-agents-board\host.mjs.
+# Agents board - the bundle patch the harness loads for this plugin.
+#
+# The plugin is installed as a bundle (`dsh plugin install <this folder>` or
+# the Plugins-page install): the harness adds the package to the web profile
+# and loads THIS file as its overlay patch. The row references the bundle's
+# own package (`dsh-agents-board`), resolved from the profile's node_modules.
+#
+# `id: agents-board` is load-bearing: the settings service publishes the row's
+# volatile Config schema under this id, and the Plugins page renders its form
+# (the enable switch lives there).
 - insert:
-  - name: file:///C:/Users/Vad/.dsh/plugins/dsh-agents-board/host.mjs
+  - id: agents-board
+    name: dsh-agents-board
     config:
       enabled: true
+      language: ru
+      notify: true
+      sound: browser
+      device: ''

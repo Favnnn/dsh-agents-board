@@ -1,6 +1,6 @@
 {
 	"name": "dsh-agents-board",
-	"version": "1.24.6",
+	"version": "1.25.9",
 	"private": true,
 	"type": "module",
 	"dsh": {
@@ -9,7 +9,7 @@
 		},
 		"client": {
 			"platform": "web",
-			"inject": ["@deepseek-ai/dsh-client-ui-settings-plugins"]
+			"inject": ["@deepseek-ai/dsh-client-locale", "@deepseek-ai/dsh-client-ui-settings"]
 		}
 	},
 	"exports": {
